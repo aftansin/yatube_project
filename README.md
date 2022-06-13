@@ -1,4 +1,4 @@
-# yatube_project
+# Yatube Project
 ### Описание
 Социальная сеть блогеров
 ### Технологии
@@ -15,5 +15,5 @@ pip install -r requirements.txt
 python3 manage.py runserver на MAC
 python manage.py runserver на Windows
 ```
-### Авторы
+### Автор
 Андрей Евстифеев
