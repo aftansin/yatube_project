@@ -21,7 +21,7 @@ from django.urls import include, path
 
 urlpatterns = [
     # Главная страница
-    path('', include('posts.urls')),
+    path('', include('posts.urls', namespace='posts')),
     # Встроенная админка Django подключена «из коробки» по адресу admin/
     path('admin/', admin.site.urls),
 ]

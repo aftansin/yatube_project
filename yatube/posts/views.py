@@ -1,16 +1,28 @@
-from django.shortcuts import render
-
-# Create your views here.
-# posts/views.py
+from django.shortcuts import render, get_object_or_404
+from .models import Post, Group
 from django.http import HttpResponse
 
 
-# Главная страница
 def index(request):
-    return HttpResponse('Главная страница')
+    template = 'posts/index.html'
+    title = 'Последние обновления на сайте'
+    posts = Post.objects.order_by('-pub_date')[:10]
+    context = {
+        'title': title,
+        'posts': posts,
+    }
+    return render(request, template, context)
 
 
-# Страница, на которой посты отфильтрованные по группам;
-# view-функция принимает параметр slug из path()
 def group_posts(request, slug):
-    return HttpResponse(f'Группа постов: {slug}')
+    template = 'posts/group_list.html'
+    group = get_object_or_404(Group, slug=slug)
+    title = f'Записи сообщества: {group}'
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    context = {
+        'title': title,
+        'group': group,
+        'posts': posts,
+    }
+    return render(request, template, context)
+#    return HttpResponse(f'Группа постов: {slug}')
